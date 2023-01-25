@@ -219,11 +219,6 @@ REST를 활용하여 데이터를 가져와 화면에 출력하고, 검색시에
 
 
 
-![image](https://user-images.githubusercontent.com/111338981/214504198-f251fd46-fde4-4ef3-b70d-cef9bde73fd1.png)
-
-
-
-
 
 &nbsp;
 &nbsp;
