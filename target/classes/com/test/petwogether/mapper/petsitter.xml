@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- Mapper 파일  -->
+<mapper namespace="petsitter">
+
+   <select id="auth" parameterType="PetSitterDTO" resultType="PetSitterDTO">
+      select * from tblPetSitter where psid=#{psid} and pspw=#{pspw}
+   </select>
+   
+  <!-- 지현 부분 START -->
+	
+	<select id="list" resultType="PetSitterDTO">
+		select * from tblPetSitter
+	</select>
+	
+	<select id="info" parameterType="String" resultType="PetSitterDTO">
+		select * from tblPetSitter where psseq = #{psseq}
+	</select>
+
+	<select id="rinfo" parameterType="String" resultType="RegisterDTO">
+		select rtitle, rcontent from tblRegister r left join tblPetSitter ps on r.psseq = ps.psseq where ps.psseq = #{psseq}
+	</select>
+	
+	<select id="pspet" parameterType="String" resultType="PetDTO">
+		select ps.psseq as psseq, page, pname, pgender, pfile from tblPet p 
+			inner join tblPPet pp on p.pseq = pp.pseq 
+				left join tblPetSitter ps on pp.psseq = ps.psseq
+                    where ps.psseq = #{psseq}
+	</select>
+	
+	<select id="rdlist" parameterType="String" resultType="RDateDTO">
+		select rddate, rdstate, ps.psseq as psseq from tblRDate rd 
+			left join tblRegister rs on rd.rseq = rs.rseq 
+				left join tblPetSitter ps on rs.psseq = ps.psseq 
+					where ps.psseq = #{psseq}
+	</select>
+	
+	<update id="setrdate" parameterType="RDateDTO">		
+	    	update tblRDate set rdstate = '이용불가능' where rddate = #{rddate} and rseq = #{rseq}    
+	</update>
+	
+	
+  <!-- 지현 부분 END -->
+
+</mapper>
